@@ -27,7 +27,7 @@ const ProductTypes = () => {
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-500"></div>
 
           <div className="relative flex flex-col justify-end h-full p-6 text-white">
-            <h3 className="text-2xl font-semibold mb-2">Premium Products</h3>
+            <h3 className="text-2xl font-semibold mb-2">Our Products</h3>
             <p className="text-sm sm:text-base mb-4">
               Experience luxury with our top-tier, high-quality products crafted
               for perfection.
@@ -53,7 +53,7 @@ const ProductTypes = () => {
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-500"></div>
 
           <div className="relative flex flex-col justify-end h-full p-6 text-white">
-            <h3 className="text-2xl font-semibold mb-2">Normal Products</h3>
+            <h3 className="text-2xl font-semibold mb-2">Our Packages</h3>
             <p className="text-sm sm:text-base mb-4">
               High-quality, reliable products for everyday use at an affordable
               price.
