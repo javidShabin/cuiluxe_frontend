@@ -149,7 +149,7 @@ const NormalProduct = () => {
   return (
     <div className="max-w-[95%] mx-auto py-10">
       <h2 className="text-3xl md:text-3xl font-extrabold mb-6 mt-10 text-center text-gray-800">
-        Our Normal Products
+        Our Packages
       </h2>
 
       {/* Type Filter Bar */}
