@@ -148,7 +148,7 @@ const fetchProductsByCategory = async (category, page = 1) => {
   return (
     <div className="max-w-[95%] mx-auto py-10">
       <h2 className="text-3xl md:text-3xl font-extrabold mb-6 mt-10 text-center text-gray-800">
-        Our Premium Products
+        Our Products
       </h2>
 
       {/* Type Filter Bar */}
