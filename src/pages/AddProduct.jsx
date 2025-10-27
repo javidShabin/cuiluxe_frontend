@@ -33,6 +33,7 @@ const AddProduct = () => {
       formData.append("category", data.category);
       formData.append("types", data.types);
       formData.append("description", data.description);
+      formData.append("isPackage", data.isPackage ? "true" : "false");
 
       for (let i = 0; i < files.length; i++) {
         formData.append("images", files[i]);
@@ -184,6 +185,19 @@ const AddProduct = () => {
             {errors.description && (
               <p className="text-red-500 text-xs mt-1">{errors.description.message}</p>
             )}
+          </div>
+
+          {/* Package */}
+          <div className="col-span-2 flex items-center gap-3">
+            <input
+              type="checkbox"
+              {...register("isPackage", { value: false })}
+              id="isPackage"
+              className="w-5 h-5 accent-orange-500 cursor-pointer"
+            />
+            <label htmlFor="isPackage" className="text-sm font-semibold text-gray-700 cursor-pointer">
+              Package Product
+            </label>
           </div>
 
           {/* Multiple Image Upload */}

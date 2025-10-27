@@ -153,6 +153,21 @@ const fetchProductsByCategory = async (category, page = 1) => {
 
       {/* Type Filter Bar */}
       <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <button
+          onClick={() => {
+            setSelectedType("");
+            setSelectedCategory("");
+            setCurrentPage(1);
+            fetchProducts(1);
+          }}
+          className={`px-4 py-2 rounded-full font-medium transition-all duration-300 ${
+            !selectedType
+              ? "bg-orange-500 text-white shadow-lg"
+              : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+          }`}
+        >
+          All
+        </button>
         {types.map((type) => (
           <button
             key={type}
@@ -208,6 +223,19 @@ const fetchProductsByCategory = async (category, page = 1) => {
           <h3 className="font-semibold text-lg mb-4 hidden lg:block">Categories</h3>
           {categoriesToShow.length > 0 ? (
             <ul className="flex flex-col gap-2">
+              <li
+                onClick={() => {
+                  setSelectedCategory("");
+                  setSelectedType("");
+                  setCurrentPage(1);
+                  fetchProducts(1);
+                }}
+                className={`px-3 py-2 rounded-lg cursor-pointer ${
+                  !selectedCategory && !selectedType ? "bg-orange-100" : "hover:bg-orange-100"
+                }`}
+              >
+                All
+              </li>
               {categoriesToShow.map((cat) => (
                 <li
                   key={cat}
