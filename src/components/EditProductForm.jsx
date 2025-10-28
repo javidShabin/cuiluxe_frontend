@@ -15,6 +15,7 @@ const EditProductForm = ({ editProduct, setEditProduct, onSubmit }) => {
         sku: editProduct.sku || "",
         price: editProduct.price || "",
         description: editProduct.description || "",
+        isPackage: !!editProduct.isPackage,
       });
     }
   }, [editProduct, reset]);
@@ -71,6 +72,15 @@ const EditProductForm = ({ editProduct, setEditProduct, onSubmit }) => {
               rows="3"
               className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 sm:col-span-2 lg:col-span-1"
             />
+            <label className="flex items-center gap-2 text-sm sm:text-base">
+              <input
+                type="checkbox"
+                {...register("isPackage")}
+                className="w-4 h-4 accent-orange-500"
+                defaultChecked={!!editProduct?.isPackage}
+              />
+              <span className="text-gray-700">Is Package</span>
+            </label>
           </div>
 
           <div className="border-t pt-4 sm:pt-6">

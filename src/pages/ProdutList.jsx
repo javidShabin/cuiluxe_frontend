@@ -80,6 +80,7 @@ const ProductList = () => {
       formData.append("sku", data.sku || "");
       formData.append("price", data.price || "");
       formData.append("description", data.description || "");
+      formData.append("isPackage", data.isPackage ? 'true' : 'false');
   
       // Build existingImages array (copy)
       let existing = Array.isArray(editProduct.images) ? [...editProduct.images] : [];
