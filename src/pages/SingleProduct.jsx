@@ -57,10 +57,10 @@ export const SingleProduct = () => {
     );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gray-50 mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <motion.div
-          className="bg-white rounded-2xl shadow-sm overflow-hidden"
+          className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -68,34 +68,34 @@ export const SingleProduct = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Left - Product Images */}
             <motion.div
-              className="relative bg-gray-50 p-8"
+              className="relative bg-gradient-to-b from-gray-50 to-white p-6 lg:p-8"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               {/* Main Image */}
-              <div className="relative aspect-square mb-6">
+              <div className="relative aspect-square mb-5 rounded-2xl overflow-hidden ring-1 ring-gray-100 bg-white">
                 <motion.img
                   src={mainImage}
                   alt={product.title}
-                  className="w-full h-full object-contain rounded-xl"
+                  className="w-full h-full object-contain"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 />
               </div>
 
               {/* Thumbnail Images */}
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+              <div className="flex gap-2.5 overflow-x-auto scrollbar-hide">
                 {product.images?.slice(0, 5).map((img, i) => (
                   <motion.button
                     key={i}
                     onClick={() => setMainImage(img)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                    className={`flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden ring-1 transition-all duration-200 ${
                       mainImage === img
-                        ? "border-orange-500 shadow-md"
-                        : "border-gray-200 hover:border-orange-300"
+                        ? "ring-orange-400 shadow-md"
+                        : "ring-gray-200 hover:ring-orange-300"
                     }`}
                   >
                     <img
@@ -110,7 +110,7 @@ export const SingleProduct = () => {
 
             {/* Right - Product Details */}
             <motion.div
-              className="p-8 lg:p-12"
+              className="p-6 lg:p-10"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -118,33 +118,32 @@ export const SingleProduct = () => {
               <div className="space-y-6">
                 {/* Product Title */}
                 <div>
-                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+                  <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
                     {product.title}
                   </h1>
                 </div>
 
                 {/* Categories */}
                 <div className="flex flex-wrap gap-2">
-                  <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-orange-100 text-orange-800 px-2.5 py-1 rounded-full text-xs font-medium">
                     {product.category}
                   </span>
                   {product.types && (
-                    <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full text-xs font-medium">
                       {product.types}
                     </span>
                   )}
                 </div>
 
                 {/* Price */}
-                <div className="flex items-baseline gap-3">
-                  <span className="text-4xl font-bold text-gray-900">₹{product.price}</span>
-                  
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl font-bold text-gray-900">₹{product.price}</span>
                 </div>
 
                 {/* Description */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Description</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h3 className="text-base font-semibold text-gray-900 mb-2">Description</h3>
+                  <p className="text-gray-700 leading-relaxed text-sm">
                     {product.description}
                   </p>
                 </div>
@@ -156,7 +155,7 @@ export const SingleProduct = () => {
                     onClick={addToCart}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-orange-500 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:bg-orange-600 transition-all duration-200 flex items-center justify-center gap-2"
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white py-3.5 px-5 rounded-xl font-semibold text-base shadow-lg hover:shadow-orange-500/30 hover:scale-[1.01] transition-all duration-200 flex items-center justify-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
