@@ -15,6 +15,7 @@ import NormalProduct from "../components/NormalProduct";
 import Contact from "../pages/Contact";
 import { Profile } from "../pages/Profile";
 import { SingleProduct } from "../pages/SingleProduct";
+import Services from "../pages/Services";
 
 
 export const router = createBrowserRouter([
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: "about",
                 element: <About />
+            },
+            {
+                path: "services",
+                element: <Services />
             },
             {
                 path: "products",

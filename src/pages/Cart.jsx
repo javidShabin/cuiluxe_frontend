@@ -94,60 +94,128 @@ const handleCheckout = () => {
 
   const doc = new jsPDF("p", "mm", "a4");
   const pageWidth = doc.internal.pageSize.getWidth();
+  const marginX = 14;
+  const brandColor = [249, 115, 22]; // orange-500
+  const grayText = [80, 80, 80];
 
-  // Header
-  doc.setFillColor(249, 115, 22);
-  doc.rect(0, 0, pageWidth, 40, "F");
+  // Header Bar
+  doc.setFillColor(...brandColor);
+  doc.rect(0, 0, pageWidth, 34, "F");
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(22);
-  doc.text("Cuiluxe Invoice", pageWidth / 2, 20, { align: "center" });
-  doc.setFontSize(12);
-  doc.text("Your trusted premium store", pageWidth / 2, 30, { align: "center" });
+  doc.setFontSize(20);
+  doc.text("CUILUXE", marginX, 20);
+  doc.setFontSize(11);
+  doc.setFont("helvetica", "normal");
+  doc.text("Invoice", pageWidth - marginX, 20, { align: "right" });
 
-  // Client info
-  doc.setFillColor(245, 245, 245);
-  doc.roundedRect(14, 50, pageWidth - 28, 25, 3, 3, "F");
-  doc.setTextColor(60, 60, 60);
+  // Company & Invoice Meta
+  let cursorY = 44;
+  doc.setTextColor(...grayText);
   doc.setFontSize(12);
-  doc.text(`Client Name: ${clientName}`, 20, 60);
-  doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 68);
+  doc.setFont("helvetica", "bold");
+  doc.text("Cuiluxe", marginX, cursorY);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.text("Premium kitchen & dining solutions", marginX, cursorY + 6);
+  doc.text("contact@cuiluxe.com", marginX, cursorY + 12);
 
-  // Prepare table
-  const tableColumns = ["#", "Item", "Price", "Qty", "Total"];
-  const tableRows = cartItems.map((item, index) => [
-    index + 1,
-    item.itemName,
-    `INR ${item.price.toFixed(2)}`,
-    item.quantity,
-    `INR ${(item.price * item.quantity).toFixed(2)}`
-  ]);
+  const invoiceNo = `INV-${Date.now().toString().slice(-6)}`;
+  const issuedDate = new Date().toLocaleDateString();
+  const rightColX = pageWidth - marginX;
+  doc.setFont("helvetica", "bold");
+  doc.text("Invoice No:", rightColX - 40, cursorY);
+  doc.setFont("helvetica", "normal");
+  doc.text(invoiceNo, rightColX, cursorY, { align: "right" });
+  doc.setFont("helvetica", "bold");
+  doc.text("Date:", rightColX - 40, cursorY + 6);
+  doc.setFont("helvetica", "normal");
+  doc.text(issuedDate, rightColX, cursorY + 6, { align: "right" });
+
+  // Bill To
+  cursorY += 22;
+  doc.setDrawColor(235, 235, 235);
+  doc.roundedRect(marginX, cursorY - 8, pageWidth - marginX * 2, 20, 2, 2);
+  doc.setFont("helvetica", "bold");
+  doc.text("Bill To", marginX + 4, cursorY);
+  doc.setFont("helvetica", "normal");
+  doc.text(`${clientName}`, marginX + 4, cursorY + 7);
+
+  // Table
+  const columns = [
+    { header: "#", dataKey: "idx" },
+    { header: "Item", dataKey: "name" },
+    { header: "Price", dataKey: "price" },
+    { header: "Qty", dataKey: "qty" },
+    { header: "Total", dataKey: "total" },
+  ];
+  const rows = cartItems.map((item, index) => ({
+    idx: index + 1,
+    name: item.itemName,
+    price: `INR ${item.price.toFixed(2)}`,
+    qty: item.quantity,
+    total: `INR ${(item.price * item.quantity).toFixed(2)}`,
+  }));
 
   autoTable(doc, {
-    startY: 85,
-    head: [tableColumns],
-    body: tableRows,
-    theme: "grid",
+    startY: cursorY + 20,
+    columns,
+    body: rows,
+    styles: { fontSize: 10, textColor: [55, 55, 55] },
     headStyles: {
-      fillColor: [249, 115, 22],
+      fillColor: brandColor,
       textColor: [255, 255, 255],
-      halign: "center",
       fontStyle: "bold",
+      halign: "left",
     },
-    bodyStyles: {
-      textColor: [60, 60, 60],
-      fontSize: 10,
+    columnStyles: {
+      idx: { cellWidth: 10, halign: "center" },
+      name: { cellWidth: 80 },
+      price: { cellWidth: 30, halign: "right" },
+      qty: { cellWidth: 15, halign: "center" },
+      total: { cellWidth: 35, halign: "right" },
     },
-    alternateRowStyles: { fillColor: [250, 250, 250] },
+    alternateRowStyles: { fillColor: [249, 249, 249] },
+    theme: "grid",
+    margin: { left: marginX, right: marginX },
   });
 
-  const finalY = doc.lastAutoTable.finalY + 10;
-  doc.setFontSize(14);
-  doc.setFont("poppins", "bold");
-  doc.setTextColor(249, 115, 22);
-  doc.text(`Grand Total: INR ${totalPrice.toFixed(2)}`, 14, finalY);
+  // Totals box (right aligned)
+  const afterTableY = doc.lastAutoTable.finalY + 8;
+  const boxWidth = 70;
+  const boxX = pageWidth - marginX - boxWidth;
+  const lineHeight = 7;
 
-  doc.save("LuxuryStore_Invoice.pdf");
+  doc.setDrawColor(235, 235, 235);
+  doc.roundedRect(boxX, afterTableY, boxWidth, 3 * lineHeight + 10, 2, 2);
+
+  const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const grandTotal = totalPrice;
+
+  doc.setFontSize(10);
+  doc.setTextColor(90, 90, 90);
+  doc.text("Subtotal", boxX + 6, afterTableY + lineHeight);
+  doc.text(`INR ${subtotal.toFixed(2)}`, boxX + boxWidth - 6, afterTableY + lineHeight, { align: "right" });
+
+  // Divider
+  doc.setDrawColor(235, 235, 235);
+  doc.line(boxX + 6, afterTableY + lineHeight + 3, boxX + boxWidth - 6, afterTableY + lineHeight + 3);
+
+  // Grand Total emphasized
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(...brandColor);
+  doc.text("Grand Total", boxX + 6, afterTableY + 2 * lineHeight + 6);
+  doc.text(`INR ${grandTotal.toFixed(2)}`, boxX + boxWidth - 6, afterTableY + 2 * lineHeight + 6, { align: "right" });
+
+  // Footer
+  const footerY = 286;
+  doc.setTextColor(140, 140, 140);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.text("Thank you for choosing CUILUXE.", marginX, footerY);
+  doc.text("cuiluxe.com", pageWidth - marginX, footerY, { align: "right" });
+
+  doc.save(`Cuiluxe_Invoice_${invoiceNo}.pdf`);
 };
 
   return (

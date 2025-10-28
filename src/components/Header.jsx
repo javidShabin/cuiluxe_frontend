@@ -41,6 +41,12 @@ const Header = () => {
           About
         </Link>
         <Link
+          to="/services"
+          className="hover:text-orange-400 transition-all duration-200 relative after:absolute after:content-[''] after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-orange-400 hover:after:w-full after:transition-all"
+        >
+          Services
+        </Link>
+        <Link
           to="/products"
           className="hover:text-orange-400 transition-all duration-200 relative after:absolute after:content-[''] after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-orange-400 hover:after:w-full after:transition-all"
         >
@@ -107,6 +113,13 @@ const Header = () => {
             className="hover:text-orange-500 transition-all"
           >
             Products
+          </Link>
+          <Link
+            to="/services"
+            onClick={() => setOpen(false)}
+            className="hover:text-orange-500 transition-all"
+          >
+            Services
           </Link>
           <Link
             to="/contact"
