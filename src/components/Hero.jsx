@@ -5,29 +5,43 @@ import { FaShoppingBag, FaArrowRight } from "react-icons/fa";
 const Hero = () => {
   const images = [
     "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
-    "https://images.unsplash.com/photo-1546549039-49ec153f0b8b?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
     "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
   ];
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  const [currentIndex, setCurrentIndex] = React.useState(1);
+  const [isTransitioning, setIsTransitioning] = React.useState(true);
   const lastScrollTimeRef = React.useRef(0);
   const autoplayTimerRef = React.useRef(null);
 
+  // Create looped images array with clones at start/end
+  const extendedImages = [
+    images[images.length - 1],
+    ...images,
+    images[0],
+  ];
+
   const goToIndex = (nextIndex) => {
-    const total = images.length;
-    const wrapped = ((nextIndex % total) + total) % total;
-    setCurrentIndex(wrapped);
+    setCurrentIndex(nextIndex);
+    setIsTransitioning(true);
+  };
+
+  const handleTransitionEnd = () => {
+    if (currentIndex === 0) {
+      setIsTransitioning(false);
+      setCurrentIndex(images.length);
+    } else if (currentIndex === images.length + 1) {
+      setIsTransitioning(false);
+      setCurrentIndex(1);
+    }
   };
 
   const handleWheel = (e) => {
     const now = Date.now();
-    // Simple throttle to avoid skipping too fast
     if (now - lastScrollTimeRef.current < 600) return;
     lastScrollTimeRef.current = now;
-    if (e.deltaY > 0) {
-      goToIndex(currentIndex + 1);
-    } else if (e.deltaY < 0) {
-      goToIndex(currentIndex - 1);
-    }
+    if (e.deltaY > 0) goToIndex(currentIndex + 1);
+    else if (e.deltaY < 0) goToIndex(currentIndex - 1);
   };
 
   const handleKeyDown = (e) => {
@@ -38,11 +52,9 @@ const Hero = () => {
   // Autoplay
   React.useEffect(() => {
     autoplayTimerRef.current = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
+      goToIndex((prev) => prev + 1);
     }, 5000);
-    return () => {
-      if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
-    };
+    return () => clearInterval(autoplayTimerRef.current);
   }, []);
 
   return (
@@ -57,16 +69,17 @@ const Hero = () => {
         <div
           className="flex h-full"
           style={{
-            width: `${images.length * 100}%`,
-            transform: `translateX(-${currentIndex * (100 / images.length)}%)`,
-            transition: "transform 700ms ease",
+            width: `${extendedImages.length * 100}%`,
+            transform: `translateX(-${currentIndex * (100 / extendedImages.length)}%)`,
+            transition: isTransitioning ? "transform 700ms ease" : "none",
           }}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {images.map((src, idx) => (
+          {extendedImages.map((src, idx) => (
             <div
               key={idx}
               className="h-full flex-none relative"
-              style={{ width: `${100 / images.length}%` }}
+              style={{ width: `${100 / extendedImages.length}%` }}
             >
               <img
                 src={src}
@@ -89,7 +102,9 @@ const Hero = () => {
           className="text-3xl sm:text-3xl lg:text-[45px] font-extrabold leading-tight"
         >
           Crafted Elegance in Kitchen Essentials,
-          <span className="block text-white/90 mt-2">Dining & Serveware</span>
+          <span className="block text-white/90 mt-2">
+            Dining & Serveware
+          </span>
         </motion.h1>
 
         <motion.p
@@ -98,7 +113,8 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="mt-6 text-lg sm:text-md text-white/80 max-w-2xl"
         >
-          Get complete kitchen solutions with Cuiluxe. From essentials to dining and serveware, we deliver and arrange everything perfectly for your home.
+          Get complete kitchen solutions with Cuiluxe. From essentials to
+          dining and serveware, we deliver and arrange everything perfectly for your home.
         </motion.p>
 
         <motion.div
@@ -121,13 +137,15 @@ const Hero = () => {
         {images.map((_, idx) => (
           <button
             key={idx}
-            onClick={() => goToIndex(idx)}
+            onClick={() => goToIndex(idx + 1)}
             aria-label={`Go to slide ${idx + 1}`}
             className={`${
-              idx === currentIndex ? "bg-white" : "bg-white/40 hover:bg-white/70"
+              idx + 1 === currentIndex
+                ? "bg-white"
+                : "bg-white/40 hover:bg-white/70"
             } w-2.5 h-2.5 rounded-full transition-colors`}
-          />)
-        )}
+          />
+        ))}
       </div>
 
       {/* Glow Elements */}
