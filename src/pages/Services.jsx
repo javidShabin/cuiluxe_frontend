@@ -4,7 +4,7 @@ import { FaBroom, FaCogs, FaBolt, FaCheckCircle } from "react-icons/fa";
 
 const Services = () => {
   return (
-    <div className="bg-white text-gray-900 overflow-hidden mt-13">
+    <div className="bg-white text-gray-900 overflow-hidden mt-5">
       {/* Hero Section */}
       <section className="relative max-w-6xl mx-auto px-4 pt-24 pb-12">
         <motion.div
@@ -17,11 +17,12 @@ const Services = () => {
           <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider bg-orange-100 text-orange-600 rounded-full">
             What we do
           </span>
-          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold">
+          <h1 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold">
             Our Services
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-            Modern, end‑to‑end solutions designed to elevate your home experience.
+          From kitchen accessories to home cleaning, we handle it all for you.
+          Our team visits directly, takes orders, and delivers everything to your door.
           </p>
         </motion.div>
       </section>

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaLeaf, FaCrown } from "react-icons/fa";
+import { FaLeaf, FaCrown, FaGem, FaClock, FaHeadset, FaGlobe, FaBroom, FaExchangeAlt } from "react-icons/fa";
 
 const About = () => {
   return (
@@ -49,20 +49,26 @@ const About = () => {
       {/* Values Section */}
       <section className="py-16 px-4 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
         {[
-          { icon: FaCrown, title: "Premium Quality", desc: "Crafted from the finest materials for lasting elegance." },
-          { icon: FaLeaf, title: "Sustainable", desc: "Eco-conscious production and ethical sourcing." },
-          { icon: FaCrown, title: "Innovative Design", desc: "Modern tools that elevate your kitchen experience." },
+          { icon: FaGem, title: "Premium Materials", desc: "Only the finest, long‑lasting materials." },
+          { icon: FaClock, title: "Completion in 2 Days", desc: "Fast delivery and setup within 48 hours." },
+          { icon: FaHeadset, title: "24/7 Client Support", desc: "Always here to help, day or night." },
+          { icon: FaGlobe, title: "40+ Imported Brands", desc: "Curated selection from global leaders." },
+          { icon: FaBroom, title: "Best Cleaning Service", desc: "Professional deep-clean for spotless kitchens." },
+          { icon: FaExchangeAlt, title: "Exchange Support", desc: "Hassle‑free exchanges with quick processing." },
         ].map((item, idx) => (
           <motion.div
             key={idx}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: idx * 0.2 }}
-            className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-xl transition"
+            transition={{ duration: 0.6, delay: idx * 0.15 }}
+            className="group relative bg-gradient-to-br from-yellow-50 to-white p-6 rounded-2xl shadow hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-yellow-100"
           >
-            <item.icon className="mx-auto text-yellow-500 text-2xl mb-3" />
-            <h4 className="text-lg font-semibold mb-2">{item.title}</h4>
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-100 text-yellow-700 shadow-inner group-hover:bg-yellow-200 group-hover:text-yellow-800 transition-colors duration-300">
+              <item.icon className="text-xl" />
+            </div>
+            <h4 className="text-base font-semibold mb-1 text-gray-900">{item.title}</h4>
             <p className="text-gray-600 text-sm">{item.desc}</p>
+            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-yellow-300/0 group-hover:ring-2 group-hover:ring-yellow-300/40 transition-all duration-300"></div>
           </motion.div>
         ))}
       </section>

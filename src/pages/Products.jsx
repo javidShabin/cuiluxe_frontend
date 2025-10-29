@@ -206,7 +206,7 @@ const fetchProductsByCategory = async (category, page = 1) => {
         )}
 
         {/* Sidebar for categories */}
-        <div className={`fixed lg:relative top-0 left-0 h-full lg:h-[750px] w-80 lg:w-1/5 bg-white lg:bg-gray-50 p-5 lg:rounded-2xl shadow-lg lg:shadow-md z-50 transform transition-transform duration-300 ${
+        <div className={`fixed lg:relative top-0 left-0 h-full lg:h-auto w-80 lg:w-1/5 bg-white lg:bg-gray-50 p-5 lg:rounded-2xl shadow-lg lg:shadow-md z-50 transform transition-transform duration-300 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}>
           <div className="flex items-center justify-between mb-4 lg:hidden">
