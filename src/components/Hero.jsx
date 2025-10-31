@@ -22,7 +22,11 @@ const Hero = () => {
   ];
 
   const goToIndex = (nextIndex) => {
-    setCurrentIndex(nextIndex);
+    // Clamp within the extended bounds (0 ... images.length + 1)
+    const maxIndex = images.length + 1;
+    const minIndex = 0;
+    const target = Math.max(minIndex, Math.min(maxIndex, nextIndex));
+    setCurrentIndex(target);
     setIsTransitioning(true);
   };
 
@@ -35,6 +39,15 @@ const Hero = () => {
       setCurrentIndex(1);
     }
   };
+
+  // When we instantly jump to a real slide (transition disabled),
+  // re-enable transitions on the next animation frame to keep the loop seamless
+  React.useEffect(() => {
+    if (!isTransitioning) {
+      const id = requestAnimationFrame(() => setIsTransitioning(true));
+      return () => cancelAnimationFrame(id);
+    }
+  }, [isTransitioning]);
 
   const handleWheel = (e) => {
     const now = Date.now();
@@ -73,7 +86,7 @@ const Hero = () => {
           style={{
             width: `${extendedImages.length * 100}%`,
             transform: `translateX(-${currentIndex * (100 / extendedImages.length)}%)`,
-            transition: isTransitioning ? "transform 700ms ease" : "none",
+            transition: isTransitioning ? "transform 800ms cubic-bezier(0.22, 1, 0.36, 1)" : "none",
           }}
           onTransitionEnd={handleTransitionEnd}
         >
@@ -86,7 +99,7 @@ const Hero = () => {
               <img
                 src={src}
                 alt="Luxury Kitchenware"
-                className="w-full h-full object-cover blur-sm"
+                className="w-full h-full object-cover"
                 draggable={false}
               />
             </div>
