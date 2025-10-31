@@ -28,16 +28,24 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="max-w-6xl mx-auto px-4 pb-20 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section className="max-w-6xl mx-auto px-4 pb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Service 1 */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-xl transition-shadow"
+          className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-shadow"
         >
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-orange-200/40 rounded-full blur-2xl"></div>
+          <div className="relative h-48 sm:h-56 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop"
+              alt="Curated kitchen and dining essentials"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-transparent"></div>
+          </div>
           <div className="p-7">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-3 rounded-xl bg-orange-100 text-orange-600">
@@ -65,9 +73,17 @@ const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-xl transition-shadow"
+          className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-shadow"
         >
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-200/40 rounded-full blur-2xl"></div>
+          <div className="relative h-48 sm:h-56 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=1600&auto=format&fit=crop"
+              alt="Professional deep home cleaning"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-transparent"></div>
+          </div>
           <div className="p-7">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-3 rounded-xl bg-emerald-100 text-emerald-700">

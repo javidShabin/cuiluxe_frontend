@@ -99,7 +99,7 @@ const Hero = () => {
               <img
                 src={src}
                 alt="Luxury Kitchenware"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_60%] md:object-center"
                 draggable={false}
               />
             </div>
@@ -114,7 +114,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-3xl sm:text-3xl lg:text-[45px] font-extrabold leading-tight"
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight"
         >
           Crafted Elegance in Kitchen Essentials,
           <span className="block text-white/90 mt-2">
@@ -126,7 +126,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mt-6 text-lg sm:text-md text-white/80 max-w-2xl"
+          className="mt-6 text-lg sm:text-xl leading-relaxed text-white/85 max-w-3xl"
         >
           Get complete kitchen solutions with Cuiluxe. From essentials to
           dining and serveware, we deliver and arrange everything perfectly for your home.
