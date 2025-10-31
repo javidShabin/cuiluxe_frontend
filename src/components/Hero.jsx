@@ -1,167 +1,109 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import { FaShoppingBag, FaArrowRight } from "react-icons/fa";
 
 const Hero = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
-    "https://i.pinimg.com/736x/4c/ae/8a/4cae8a5f977f5eacbd5fd9e2dbecfb2a.jpg",
-    "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
+  const slides = [
+    {
+      image:
+        "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
+      headingTop: "Crafted Elegance in Kitchen Essentials,",
+      headingBottom: "Dining & Serveware",
+      blurb:
+        "Complete kitchen solutions — curated, delivered, and arranged perfectly for your home.",
+    },
+    {
+      image:
+        "https://i.pinimg.com/736x/4c/ae/8a/4cae8a5f977f5eacbd5fd9e2dbecfb2a.jpg",
+      headingTop: "Premium Serveware Collections",
+      headingBottom: "Delivered & Installed",
+      blurb:
+        "From selection to setup, we handle everything end-to-end with care.",
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
+      headingTop: "Design. Organize. Shine.",
+      headingBottom: "Your Kitchen, Upgraded",
+      blurb:
+        "Fast delivery, expert arrangement, and a premium finish you’ll love.",
+    },
   ];
-
-  const [currentIndex, setCurrentIndex] = React.useState(1);
-  const [isTransitioning, setIsTransitioning] = React.useState(true);
-  const lastScrollTimeRef = React.useRef(0);
-  const autoplayTimerRef = React.useRef(null);
-
-  // Create looped images array with clones at start/end
-  const extendedImages = [
-    images[images.length - 1],
-    ...images,
-    images[0],
-  ];
-
-  const goToIndex = (nextIndex) => {
-    // Clamp within the extended bounds (0 ... images.length + 1)
-    const maxIndex = images.length + 1;
-    const minIndex = 0;
-    const target = Math.max(minIndex, Math.min(maxIndex, nextIndex));
-    setCurrentIndex(target);
-    setIsTransitioning(true);
-  };
-
-  const handleTransitionEnd = () => {
-    if (currentIndex === 0) {
-      setIsTransitioning(false);
-      setCurrentIndex(images.length);
-    } else if (currentIndex === images.length + 1) {
-      setIsTransitioning(false);
-      setCurrentIndex(1);
-    }
-  };
-
-  // When we instantly jump to a real slide (transition disabled),
-  // re-enable transitions on the next animation frame to keep the loop seamless
-  React.useEffect(() => {
-    if (!isTransitioning) {
-      const id = requestAnimationFrame(() => setIsTransitioning(true));
-      return () => cancelAnimationFrame(id);
-    }
-  }, [isTransitioning]);
-
-  const handleWheel = (e) => {
-    const now = Date.now();
-    if (now - lastScrollTimeRef.current < 600) return;
-    lastScrollTimeRef.current = now;
-    if (e.deltaY > 0) goToIndex(currentIndex + 1);
-    else if (e.deltaY < 0) goToIndex(currentIndex - 1);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "ArrowRight") goToIndex(currentIndex + 1);
-    if (e.key === "ArrowLeft") goToIndex(currentIndex - 1);
-  };
-
-  // Autoplay
-  React.useEffect(() => {
-    autoplayTimerRef.current = setInterval(() => {
-      // Use functional update to avoid stale closures and ensure numeric index
-      setIsTransitioning(true);
-      setCurrentIndex((prev) => prev + 1);
-    }, 5000);
-    return () => clearInterval(autoplayTimerRef.current);
-  }, []);
 
   return (
     <section
       className="relative w-full h-screen flex items-center justify-center font-cooper text-white overflow-hidden"
-      onWheel={handleWheel}
-      onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      {/* Background Slider */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="flex h-full"
-          style={{
-            width: `${extendedImages.length * 100}%`,
-            transform: `translateX(-${currentIndex * (100 / extendedImages.length)}%)`,
-            transition: isTransitioning ? "transform 800ms cubic-bezier(0.22, 1, 0.36, 1)" : "none",
-          }}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          {extendedImages.map((src, idx) => (
-            <div
-              key={idx}
-              className="h-full flex-none relative"
-              style={{ width: `${100 / extendedImages.length}%` }}
-            >
+      {/* Swiper with Background + Content */}
+      <Swiper
+        modules={[Autoplay, Pagination, EffectFade]}
+        effect="fade"
+        loop
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        speed={800}
+        pagination={{ clickable: true }}
+        className="absolute inset-0 h-full w-full"
+      >
+        {slides.map((slide, idx) => (
+          <SwiperSlide key={idx}>
+            <div className="relative w-full h-full">
               <img
-                src={src}
+                src={slide.image}
                 alt="Luxury Kitchenware"
                 className="w-full h-full object-cover object-[center_60%] md:object-center"
                 draggable={false}
               />
+              <div className="absolute inset-0 bg-black/50"></div>
+
+              {/* Slide Content */}
+              <div className="absolute inset-0 flex items-center justify-center px-6">
+                <div className="relative z-10 px-6 sm:px-10 lg:px-16 flex flex-col items-center justify-center text-center text-white">
+                  <motion.h1
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight"
+                  >
+                    {slide.headingTop}
+                    <span className="block text-white/90 mt-2">
+                      {slide.headingBottom}
+                    </span>
+                  </motion.h1>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="mt-6 text-lg sm:text-xl leading-relaxed text-white/85 max-w-3xl"
+                  >
+                    {slide.blurb}
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.35 }}
+                    className="mt-10 flex flex-wrap gap-5 justify-center"
+                  >
+                    <button className="flex items-center gap-2 bg-white text-gray-900 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition duration-300">
+                      <FaShoppingBag /> Shop Now
+                    </button>
+                    <button className="flex items-center gap-2 border border-white hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition duration-300">
+                      Learn More <FaArrowRight />
+                    </button>
+                  </motion.div>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-        <div className="absolute inset-0 bg-black/50"></div>
-      </div>
-
-      {/* Frosted Glass Content */}
-      <div className="relative z-10 px-6 sm:px-10 lg:px-16 flex flex-col items-center justify-center text-center ">
-        <motion.h1
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight"
-        >
-          Crafted Elegance in Kitchen Essentials,
-          <span className="block text-white/90 mt-2">
-            Dining & Serveware
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="mt-6 text-lg sm:text-xl leading-relaxed text-white/85 max-w-3xl"
-        >
-          Get complete kitchen solutions with Cuiluxe. From essentials to
-          dining and serveware, we deliver and arrange everything perfectly for your home.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="mt-10 flex flex-wrap gap-5 justify-center"
-        >
-          <button className="flex items-center gap-2 bg-white text-gray-900 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition duration-300">
-            <FaShoppingBag /> Shop Now
-          </button>
-          <button className="flex items-center gap-2 border border-white hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition duration-300">
-            Learn More <FaArrowRight />
-          </button>
-        </motion.div>
-      </div>
-
-      {/* Slider Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-        {images.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => goToIndex(idx + 1)}
-            aria-label={`Go to slide ${idx + 1}`}
-            className={`${
-              idx + 1 === currentIndex
-                ? "bg-white"
-                : "bg-white/40 hover:bg-white/70"
-            } w-2.5 h-2.5 rounded-full transition-colors`}
-          />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
 
       {/* Glow Elements */}
       <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-tr from-white/10 to-transparent rounded-full blur-3xl"></div>
