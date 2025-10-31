@@ -5,6 +5,7 @@ import Workflow from "../components/Workflow";
 
 import About from "./About";
 import ProductSection from "./Products";
+import Services from "./Services";
 
 export const Home = () => {
   const user = { name: "Ramshiya" };
@@ -18,6 +19,7 @@ export const Home = () => {
       <About />
       <Workflow />
       <ProductTypes />
+      <Services />
       <Footer />
     </>
   );
