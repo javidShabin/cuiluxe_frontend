@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 import { axiosInstance } from "../config/axiosInstance";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
@@ -325,7 +326,7 @@ const handleCheckout = () => {
 
                 <div className="flex-1 ml-4">
                   <h3 className="text-md font-medium text-gray-900">{item.itemName}</h3>
-                  <p className="text-sm text-gray-600">${item.price.toFixed(2)}</p>
+                  <p className="text-sm text-gray-600 flex items-center"><FaIndianRupeeSign />{item.price.toFixed(2)}</p>
                 </div>
 
                 <div className="flex items-center space-x-2">
@@ -355,9 +356,9 @@ const handleCheckout = () => {
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row justify-between items-center bg-gray-100 p-6 rounded-lg">
-            <span className="text-lg font-semibold text-gray-900">
-              Total: ${totalPrice.toFixed(2)}
-            </span>
+            <p className="text-lg font-semibold text-gray-900 flex items-center">
+              Total: <FaIndianRupeeSign />{totalPrice.toFixed(2)}
+            </p>
             <button
               onClick={handleCheckout}
               disabled={!clientName || !clientAddress || !clientEmail || !clientPhone}
