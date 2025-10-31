@@ -64,13 +64,14 @@ const Workflow = () => {
           viewport={{ once: true }}
           className="sm:text-left text-center mb-20"
         >
-          <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight text-gray-900 mb-4 drop-shadow-xl font-sans">
+          <h2 className="text-4xl text-center sm:text-5xl font-extrabold leading-tight tracking-tight text-gray-900 mb-4 drop-shadow-xl font-sans">
             Project Completion in {" "}
             <span className="bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">
               Just 2 Days
             </span>
           </h2>
-          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto sm:mx-0">
+          <div className="flex justify-center">
+<div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto sm:mx-0">
             <div className="relative bg-white/90 backdrop-blur rounded-2xl p-4 shadow-sm ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-md transition-all duration-200">
               <div className="absolute -top-2 left-4 px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">Day 1</div>
               <div className="flex items-center gap-3">
@@ -96,6 +97,8 @@ const Workflow = () => {
               </div>
             </div>
           </div>
+          </div>
+          
         </motion.div>
 
         {/* Timeline Flow */}
