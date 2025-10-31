@@ -5,7 +5,7 @@ import { FaShoppingBag, FaArrowRight } from "react-icons/fa";
 const Hero = () => {
   const images = [
     "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
-    "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
+    "https://i.pinimg.com/736x/4c/ae/8a/4cae8a5f977f5eacbd5fd9e2dbecfb2a.jpg",
     "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.1.0&auto=format&fit=crop&w=1920&q=80",
   ];
 
