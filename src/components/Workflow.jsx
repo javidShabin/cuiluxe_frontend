@@ -48,15 +48,14 @@ const Workflow = () => {
   ];
 
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Base Section Glow (upgraded) */}
-      <div className="absolute left-0 right-0 top-[-120px] h-[320px] rounded-full z-0 pointer-events-none"></div>
-      <div className="absolute left-[10%] bottom-[-8rem] w-[34vw] h-[24vw] min-h-[270px] min-w-[260px] max-w-[440px] max-h-[440px]  pointer-events-none z-0"></div>
-      {/* Main Background Glow */}
-      <div className="absolute inset-0  pointer-events-none z-0"></div>
+    <section className="relative py-28 md:py-32 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
+      {/* Enhanced Background Glows */}
+      <div className="absolute left-0 right-0 top-[-100px] h-[400px] bg-gradient-to-b from-orange-50/40 via-transparent to-transparent rounded-full blur-3xl z-0 pointer-events-none"></div>
+      <div className="absolute right-[10%] bottom-[-100px] w-[500px] h-[400px] bg-gradient-to-br from-yellow-50/30 to-transparent rounded-full blur-3xl pointer-events-none z-0"></div>
+      <div className="absolute left-[5%] top-1/2 w-[300px] h-[300px] bg-gradient-to-br from-blue-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0"></div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 relative z-10">
-        {/* Heading */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Enhanced Heading Section */}
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,93 +69,146 @@ const Workflow = () => {
               Just 2 Days
             </span>
           </h2>
+          
+          {/* Enhanced Day Cards */}
           <div className="flex justify-center">
-<div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto sm:mx-0">
-            <div className="relative bg-white/90 backdrop-blur rounded-2xl p-4 shadow-sm ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-md transition-all duration-200">
-              <div className="absolute -top-2 left-4 px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">Day 1</div>
-              <div className="flex items-center gap-3">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
-                  <FaClipboardList className="text-xl" />
-                </span>
-                <div>
-                  <p className="text-[13px] text-gray-500 leading-4">Collection order</p>
-                  <p className="text-sm text-gray-800 font-medium">Confirm specs and finalize selection</p>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl w-full">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+                <div className="relative bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-xl ring-1 ring-gray-200/80 hover:ring-blue-200 transition-all duration-300">
+                  <div className="absolute -top-3 left-6 px-3 py-1 text-xs font-bold rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md ring-2 ring-blue-100">
+                    Day 1
+                  </div>
+                  <div className="flex items-center gap-4 pt-2">
+                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 text-white shadow-md ring-2 ring-blue-100">
+                      <FaClipboardList className="text-xl" />
+                    </span>
+                    <div className="flex-1">
+                      <p className="text-xs text-gray-500 font-medium mb-1">Collection order</p>
+                      <p className="text-sm font-semibold text-gray-800 leading-tight">Confirm specs and finalize selection</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="relative bg-white/90 backdrop-blur rounded-2xl p-4 shadow-sm ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-md transition-all duration-200">
-              <div className="absolute -top-2 left-4 px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200">Day 2</div>
-              <div className="flex items-center gap-3">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
-                  <FaTruck className="text-xl" />
-                </span>
-                <div>
-                  <p className="text-[13px] text-gray-500 leading-4">Delivery & setup</p>
-                  <p className="text-sm text-gray-800 font-medium">Fast delivery and professional installation</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+                <div className="relative bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-xl ring-1 ring-gray-200/80 hover:ring-emerald-200 transition-all duration-300">
+                  <div className="absolute -top-3 left-6 px-3 py-1 text-xs font-bold rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-md ring-2 ring-emerald-100">
+                    Day 2
+                  </div>
+                  <div className="flex items-center gap-4 pt-2">
+                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-md ring-2 ring-emerald-100">
+                      <FaTruck className="text-xl" />
+                    </span>
+                    <div className="flex-1">
+                      <p className="text-xs text-gray-500 font-medium mb-1">Delivery & setup</p>
+                      <p className="text-sm font-semibold text-gray-800 leading-tight">Fast delivery and professional installation</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
           </div>
           
         </motion.div>
 
-        {/* Timeline Flow */}
+        {/* Enhanced Timeline Flow */}
         <div className="relative">
-          {/* Line connector */}
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-orange-200 via-yellow-200 to-transparent transform -translate-y-1/2 hidden lg:block z-10"></div>
+          {/* Improved Timeline Connector */}
+          <div className="absolute top-[120px] left-[10%] right-[10%] h-1 bg-gradient-to-r from-transparent via-orange-300/40 via-yellow-300/40 to-transparent transform -translate-y-1/2 hidden xl:block z-0">
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-200/30 via-yellow-200/40 to-orange-200/30 animate-pulse"></div>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-9 md:gap-10 justify-items-center items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8 justify-items-center items-stretch">
             {steps.map((step, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 60 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.95, delay: idx * 0.16, type: 'spring', bounce: 0.34 }}
-                viewport={{ once: true }}
-                className="relative w-full flex"
+                transition={{ 
+                  duration: 0.7, 
+                  delay: idx * 0.15, 
+                  type: 'spring', 
+                  stiffness: 100,
+                  damping: 15
+                }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="relative w-full flex justify-center"
               >
-                {/* Connector dot */}
+                {/* Enhanced Connector Dot */}
                 {idx < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 right-[-28px] w-5 h-5 rounded-full bg-gradient-to-r from-orange-400/60 to-yellow-200/70 shadow-lg opacity-40 z-30"></div>
+                  <div className="hidden xl:block absolute top-[120px] right-[-32px] w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-yellow-400 shadow-lg ring-4 ring-white z-30 animate-pulse"></div>
                 )}
-                {/* Modern Card */}
-                <div className="group relative w-full bg-white border border-gray-200 rounded-[1.75rem] p-8 pt-14 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-visible">
-                  {/* Glow behind icon */}
-                  <span className="absolute left-1/2 top-8 -translate-x-1/2 blur-2xl w-24 h-24 rounded-full" style={{background:`linear-gradient(135deg, ${step.color.replace('from-','').replace('to-','')}, #fff1 80%)`, opacity:0.12, zIndex:0}}></span>
-                  {/* Step Number Badge */}
-                  <span className="absolute top-3 left-5 bg-gradient-to-r from-orange-400/90 to-yellow-200/80 text-white text-sm font-bold px-5 py-1.5 rounded-xl shadow-lg ring-2 ring-yellow-200/50 backdrop-blur-[4px] transition-all duration-300 group-hover:-translate-y-1 group-hover:ring-orange-400 group-hover:bg-opacity-90 select-none cursor-pointer">
+                
+                {/* Enhanced Modern Card */}
+                <div className="group relative w-full max-w-[280px] bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-3xl p-6 pt-16 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                  {/* Subtle gradient background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                  
+                  {/* Enhanced glow behind icon */}
+                  <div 
+                    className={`absolute left-1/2 top-16 -translate-x-1/2 blur-3xl w-32 h-32 rounded-full bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0`}
+                  ></div>
+                  
+                  {/* Enhanced Step Number Badge */}
+                  <span className="absolute top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-yellow-400 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg ring-2 ring-orange-200/50 backdrop-blur-sm transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl group-hover:ring-orange-300 select-none">
                     {`Step ${idx + 1}`}
                   </span>
-                  {/* Icon */}
-                  <div className="mb-6 flex justify-center">
-                    <div
-                      className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg group-hover:shadow-orange-200 group-hover:scale-105 transition-all duration-300 z-20 after:absolute after:inset-0 after:rounded-full after:bg-white/10 after:blur-lg after:opacity-75`}
-                      style={{filter:'drop-shadow(0 0 24px rgba(255,180,0,0.08))'}}
+                  
+                  {/* Enhanced Icon Container */}
+                  <div className="mb-5 flex justify-center relative z-10">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-xl group-hover:shadow-2xl transition-all duration-500 z-20`}
+                      style={{
+                        filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.15))'
+                      }}
                     >
-                      {/* Animated Ring */}
-                      <span className="absolute inset-0 rounded-full border border-white/20 group-hover:ring-2 group-hover:ring-yellow-300/20 transition-all duration-300 z-0"></span>
-                      <step.icon className="text-4xl relative z-10 group-hover:scale-105 transition-transform duration-300" />
-                    </div>
+                      {/* Animated glow ring */}
+                      <span className="absolute inset-0 rounded-2xl border-2 border-white/30 group-hover:border-white/50 transition-all duration-500"></span>
+                      <span className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                      <step.icon className="text-3xl relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                    </motion.div>
                   </div>
-                  {/* Title */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center tracking-tight drop-shadow-[0_1.5px_7px_rgba(243,95,50,0.01)]">
+                  
+                  {/* Enhanced Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 text-center tracking-tight leading-tight">
                     {step.title}
                   </h3>
-                  {/* Description */}
-                  <p className="text-gray-500 text-base sm:text-lg text-center leading-relaxed max-h-[4.5em] line-clamp-3 mx-auto">
+                  
+                  {/* Enhanced Description */}
+                  <p className="text-gray-600 text-sm leading-relaxed text-center min-h-[3.5rem]">
                     {step.desc}
                   </p>
-                  {/* Shine overlay */}
-                  <div className="absolute inset-0 rounded-[2.1rem] bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+                  
+                  {/* Enhanced shine overlay */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                  
+                  {/* Bottom accent line */}
+                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${step.color} opacity-0 group-hover:opacity-60 transition-opacity duration-500`}></div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
-      {/* Bottom Accent Glow */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-orange-100/60 via-transparent to-transparent pointer-events-none z-0"></div>
+      
+      {/* Enhanced Bottom Accent Glow */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-orange-50/40 via-transparent to-transparent pointer-events-none z-0"></div>
     </section>
   );
 };
