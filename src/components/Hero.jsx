@@ -52,7 +52,9 @@ const Hero = () => {
   // Autoplay
   React.useEffect(() => {
     autoplayTimerRef.current = setInterval(() => {
-      goToIndex((prev) => prev + 1);
+      // Use functional update to avoid stale closures and ensure numeric index
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => prev + 1);
     }, 5000);
     return () => clearInterval(autoplayTimerRef.current);
   }, []);
