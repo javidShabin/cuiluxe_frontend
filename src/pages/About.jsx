@@ -13,16 +13,16 @@ import {
 
 const About = () => {
   const values = [
-    { icon: FaGem, title: "Premium Materials", desc: "Only the finest, long-lasting materials." },
+    { icon: FaGem, title: "Premium Materials", desc: "Only the finest, long-lasting kitchenware." },
     { icon: FaClock, title: "Completion in 2 Days", desc: "Fast delivery and setup within 48 hours." },
     { icon: FaHeadset, title: "24/7 Client Support", desc: "Always here to help, day or night." },
     { icon: FaGlobe, title: "40+ Imported Brands", desc: "Curated selection from global leaders." },
-    { icon: FaBroom, title: "Best Cleaning Service", desc: "Professional deep-clean for spotless kitchens." },
-    { icon: FaExchangeAlt, title: "Exchange Support", desc: "Hassle-free exchanges with quick processing." },
+    { icon: FaBroom, title: "Best Cleaning Service", desc: "Professional deep-clean for spotless rooms." },
+    // { icon: FaExchangeAlt, title: "Exchange Support", desc: "Hassle-free exchanges with quick processing." },
   ];
 
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-orange-50 text-gray-900 overflow-hidden mt-12">
+    <div className="text-gray-900 overflow-hidden mt-12">
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         {/* Text */}
