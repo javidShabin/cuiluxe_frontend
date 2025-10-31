@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import ProductTypes from "../components/ProductType";
+import ShowWork from "../components/ShowWork";
 import Workflow from "../components/Workflow";
 
 import About from "./About";
@@ -19,6 +20,7 @@ export const Home = () => {
       <About />
       <Workflow />
       <ProductTypes />
+      <ShowWork />
       <Services />
       <Footer />
     </>

@@ -24,7 +24,7 @@ const About = () => {
   return (
     <div className="text-gray-900 overflow-hidden mt-12">
       {/* Hero Section - full width image with overlay text */}
-      <section className="relative w-full h-[60vh] sm:h-[70vh] md:h-[45vh]">
+      <section className="relative w-full min-h-[50vh] h-[55vh] sm:h-[60vh] md:h-[60vh]">
         <img
           src="https://plus.unsplash.com/premium_photo-1716112776995-cf224aa387b5?auto=format&fit=crop&q=70&w=1600"
           alt="Luxury Kitchen"
@@ -32,7 +32,7 @@ const About = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent"></div>
         <div className="relative z-10 h-full">
-          <div className="max-w-6xl mx-auto h-full px-6 flex items-center justify-center">
+          <div className="max-w-6xl mx-auto h-full px-4 sm:px-6 flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -40,9 +40,9 @@ const About = () => {
               viewport={{ once: true }}
               className="text-white"
             >
-              <div className="bg-black/30 backdrop-blur-md rounded-2xl p-5 sm:p-6 ring-1 ring-white/10 max-w-4xl">
+              <div className="bg-black/30 backdrop-blur-md rounded-2xl p-4 sm:p-6 ring-1 ring-white/10 w-full max-w-4xl">
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs bg-white/15 text-white ring-1 ring-white/20 font-semibold">Trusted home solutions</span>
-                <h2 className="text-4xl  sm:text-5xl md:text-4xl font-extrabold leading-tight tracking-tight mt-3 mb-2 drop-shadow flex items-center justify-center gap-3 text-center">
+                <h2 className="text-3xl sm:text-5xl md:text-4xl font-extrabold leading-tight tracking-tight mt-3 mb-2 drop-shadow flex items-center justify-center gap-3 text-center">
                   
                   <span className="relative">
                     Designed for Everyday Luxury
@@ -63,17 +63,17 @@ const About = () => {
         </div>
       </section>
       {/* Stats under hero */}
-      <section className="max-w-4xl mx-auto px-4 py-5">
-        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-0 text-center overflow-hidden rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-lg ring-1 ring-black/10">
-          <div className="py-6">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-0 text-center overflow-hidden rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-lg ring-1 ring-black/10">
+          <div className="py-5 sm:py-6">
             <p className="text-4xl sm:text-3xl font-extrabold tracking-tight">40+</p>
             <p className="text-[10px] sm:text-sm text-white/70">Imported brands</p>
           </div>
-          <div className="py-6 border-x border-white/10">
+          <div className="py-5 sm:py-6 sm:border-x border-white/10">
             <p className="text-4xl sm:text-3xl font-extrabold tracking-tight">2 Days</p>
             <p className="text-[10px] sm:text-sm text-white/70">Completion promise</p>
           </div>
-          <div className="py-6">
+          <div className="py-5 sm:py-6">
             <p className="text-4xl sm:text-3xl font-extrabold tracking-tight">24/7</p>
             <p className="text-[10px] sm:text-sm text-white/70">Client support</p>
           </div>
@@ -81,7 +81,7 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-10 px-6 max-w-6xl mx-auto">
+      <section className="py-10 px-4 sm:px-6 max-w-6xl mx-auto">
         <motion.h3
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ const About = () => {
           <span className="block w-24 h-[3px] bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto mt-3 rounded-full"></span>
         </motion.h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {values.map((item, idx) => (
             <motion.div
               key={idx}

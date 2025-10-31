@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import "swiper/css/navigation";
 import { FaShoppingBag, FaArrowRight } from "react-icons/fa";
 
 const Hero = () => {
@@ -42,12 +43,16 @@ const Hero = () => {
     >
       {/* Swiper with Background + Content */}
       <Swiper
-        modules={[Autoplay, Pagination, EffectFade]}
+        modules={[Autoplay, Pagination, EffectFade, Keyboard]}
         effect="fade"
         loop
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        speed={800}
-        pagination={{ clickable: true }}
+        autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+        speed={850}
+        pagination={{ clickable: true, dynamicBullets: true }}
+        keyboard={{ enabled: true }}
+        grabCursor
+        preloadImages={false}
+        lazy={true}
         className="absolute inset-0 h-full w-full"
       >
         {slides.map((slide, idx) => (
@@ -56,9 +61,10 @@ const Hero = () => {
               <img
                 src={slide.image}
                 alt="Luxury Kitchenware"
-                className="w-full h-full object-cover object-[center_60%] md:object-center"
+                className="w-full h-full object-cover object-[center_60%] md:object-center swiper-lazy"
                 draggable={false}
               />
+              <div className="swiper-lazy-preloader"></div>
               <div className="absolute inset-0 bg-black/50"></div>
 
               {/* Slide Content */}
