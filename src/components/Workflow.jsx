@@ -29,7 +29,7 @@ const Workflow = () => {
       icon: FaBoxOpen,
       title: "Order Preparation",
       desc: "We prepare and organize you choosen items for smooth, secure delivery.",
-      color: "from-purple-500 to-pink-500",
+      color: "from-emerald-500 to-teal-500",
     },
     {
       icon: FaTruck,
@@ -41,7 +41,7 @@ const Workflow = () => {
       icon: FaClipboardList,
       title: "On-Time Product Completion",
       desc: "Every product is completed within the promised timeline-combining speed and perfection.",
-      color: "from-pink-500 to-fuchsia-500",
+      color: "from-green-500 to-emerald-500",
     },
     
     
@@ -64,15 +64,38 @@ const Workflow = () => {
           viewport={{ once: true }}
           className="sm:text-left text-center mb-20"
         >
-          <h2 className="text-5xl sm:text-6xl font-extrabold leading-tight tracking-tight text-gray-900 mb-4 drop-shadow-xl font-sans">
-            Our Refined{" "}
+          <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight text-gray-900 mb-4 drop-shadow-xl font-sans">
+            Project Completion in {" "}
             <span className="bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">
-              Workflow
+              Just 2 Days
             </span>
           </h2>
-          <p className="text-gray-700 text-lg sm:text-xl max-w-2xl mt-3 mx-auto sm:mx-0">
-            Experience the elegance of precision — from the first conversation to your completed kitchen in just two days.
-          </p>
+          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto sm:mx-0">
+            <div className="relative bg-white/90 backdrop-blur rounded-2xl p-4 shadow-sm ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-md transition-all duration-200">
+              <div className="absolute -top-2 left-4 px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">Day 1</div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                  <FaClipboardList className="text-xl" />
+                </span>
+                <div>
+                  <p className="text-[13px] text-gray-500 leading-4">Collection order</p>
+                  <p className="text-sm text-gray-800 font-medium">Confirm specs and finalize selection</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative bg-white/90 backdrop-blur rounded-2xl p-4 shadow-sm ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-md transition-all duration-200">
+              <div className="absolute -top-2 left-4 px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200">Day 2</div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
+                  <FaTruck className="text-xl" />
+                </span>
+                <div>
+                  <p className="text-[13px] text-gray-500 leading-4">Delivery & setup</p>
+                  <p className="text-sm text-gray-800 font-medium">Fast delivery and professional installation</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Timeline Flow */}
@@ -95,9 +118,9 @@ const Workflow = () => {
                   <div className="hidden lg:block absolute top-1/2 right-[-28px] w-5 h-5 rounded-full bg-gradient-to-r from-orange-400/60 to-yellow-200/70 shadow-lg opacity-40 z-30"></div>
                 )}
                 {/* Modern Card */}
-                <div className="group relative w-full bg-white/70 backdrop-blur-2xl border border-orange-100/50 rounded-[2.1rem] p-8 pt-14 shadow-lg hover:shadow-orange-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-visible hover:border-orange-200/70 before:absolute before:inset-0 before:rounded-[2.1rem] before:z-[-1] before:bg-gradient-to-tr before:from-white/55 before:via-orange-100/50 before:to-orange-50/10 before:opacity-70">
+                <div className="group relative w-full bg-white border border-gray-200 rounded-[1.75rem] p-8 pt-14 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-visible">
                   {/* Glow behind icon */}
-                  <span className="absolute left-1/2 top-8 -translate-x-1/2 blur-2xl w-24 h-24 rounded-full" style={{background:`linear-gradient(135deg, ${step.color.replace('from-','').replace('to-','')}, #fff1 80%)`, opacity:0.39, zIndex:0}}></span>
+                  <span className="absolute left-1/2 top-8 -translate-x-1/2 blur-2xl w-24 h-24 rounded-full" style={{background:`linear-gradient(135deg, ${step.color.replace('from-','').replace('to-','')}, #fff1 80%)`, opacity:0.12, zIndex:0}}></span>
                   {/* Step Number Badge */}
                   <span className="absolute top-3 left-5 bg-gradient-to-r from-orange-400/90 to-yellow-200/80 text-white text-sm font-bold px-5 py-1.5 rounded-xl shadow-lg ring-2 ring-yellow-200/50 backdrop-blur-[4px] transition-all duration-300 group-hover:-translate-y-1 group-hover:ring-orange-400 group-hover:bg-opacity-90 select-none cursor-pointer">
                     {`Step ${idx + 1}`}
@@ -105,12 +128,12 @@ const Workflow = () => {
                   {/* Icon */}
                   <div className="mb-6 flex justify-center">
                     <div
-                      className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-2xl group-hover:shadow-orange-200 group-hover:scale-105 transition-all duration-500 z-20 after:absolute after:inset-0 after:rounded-full after:bg-white/10 after:blur-lg after:opacity-75`}
-                      style={{filter:'drop-shadow(0 0 24px rgba(255,180,0,0.12))'}}
+                      className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg group-hover:shadow-orange-200 group-hover:scale-105 transition-all duration-300 z-20 after:absolute after:inset-0 after:rounded-full after:bg-white/10 after:blur-lg after:opacity-75`}
+                      style={{filter:'drop-shadow(0 0 24px rgba(255,180,0,0.08))'}}
                     >
                       {/* Animated Ring */}
-                      <span className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-white group-hover:ring-4 group-hover:ring-yellow-300/25 transition-all duration-500 animate-pulse z-0"></span>
-                      <step.icon className="text-4xl relative z-10 group-hover:scale-110 group-hover:rotate-[-6deg] transition-transform duration-300" />
+                      <span className="absolute inset-0 rounded-full border border-white/20 group-hover:ring-2 group-hover:ring-yellow-300/20 transition-all duration-300 z-0"></span>
+                      <step.icon className="text-4xl relative z-10 group-hover:scale-105 transition-transform duration-300" />
                     </div>
                   </div>
                   {/* Title */}

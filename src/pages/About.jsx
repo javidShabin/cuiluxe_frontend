@@ -13,7 +13,7 @@ import {
 
 const About = () => {
   const values = [
-    { icon: FaGem, title: "Premium Materials", desc: "Only the finest, long-lasting kitchenware." },
+    { icon: FaGem, title: "Premium Products", desc: "Only the finest, long-lasting kitchenware." },
     { icon: FaClock, title: "Completion in 2 Days", desc: "Fast delivery and setup within 48 hours." },
     { icon: FaHeadset, title: "24/7 Client Support", desc: "Always here to help, day or night." },
     { icon: FaGlobe, title: "40+ Imported Brands", desc: "Curated selection from global leaders." },

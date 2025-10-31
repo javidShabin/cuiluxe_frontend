@@ -10,6 +10,16 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [clientName, setClientName] = useState("");
+  const [clientAddress, setClientAddress] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
+
+  const seller = {
+    name: "Cuiluxe",
+    address: "123 Kitchen Ave, Suite 7, City, Country",
+    email: "contact@cuiluxe.com",
+    phone: "+1 (555) 123-4567",
+  };
 
   useEffect(() => {
     const getCart = async () => {
@@ -82,11 +92,11 @@ const Cart = () => {
   
 
 const handleCheckout = () => {
-  if (!clientName) {
+  if (!clientName || !clientAddress || !clientEmail || !clientPhone) {
     Swal.fire({
       icon: 'warning',
-      title: 'Missing Name',
-      text: 'Please enter your name before generating the invoice.',
+      title: 'Missing Details',
+      text: 'Please add client name, address, email, and phone to generate the PDF.',
       confirmButtonColor: '#f97316', // orange
     });
     return;
@@ -95,58 +105,86 @@ const handleCheckout = () => {
   const doc = new jsPDF("p", "mm", "a4");
   const pageWidth = doc.internal.pageSize.getWidth();
   const marginX = 14;
-  const brandColor = [249, 115, 22]; // orange-500
-  const grayText = [80, 80, 80];
+  const brandColor = [33, 53, 94]; // deep navy
+  const grayText = [60, 60, 60];
 
   // Header Bar
   doc.setFillColor(...brandColor);
-  doc.rect(0, 0, pageWidth, 34, "F");
+  doc.rect(0, 0, pageWidth, 40, "F");
   doc.setTextColor(255, 255, 255);
+  // Left: logo placeholder and company name
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
-  doc.text("CUILUXE", marginX, 20);
-  doc.setFontSize(11);
-  doc.setFont("helvetica", "normal");
-  doc.text("Invoice", pageWidth - marginX, 20, { align: "right" });
+  doc.setFontSize(22);
+  doc.text("CUILUXE", marginX, 24);
+  // Right: INVOICE label
+  doc.setFontSize(26);
+  doc.text("INVOICE", pageWidth - marginX, 20, { align: "right" });
 
-  // Company & Invoice Meta
-  let cursorY = 44;
+  // Company & Invoice Meta (two columns beneath header)
+  let cursorY = 50;
   doc.setTextColor(...grayText);
-  doc.setFontSize(12);
-  doc.setFont("helvetica", "bold");
-  doc.text("Cuiluxe", marginX, cursorY);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.text("Premium kitchen & dining solutions", marginX, cursorY + 6);
-  doc.text("contact@cuiluxe.com", marginX, cursorY + 12);
-
   const invoiceNo = `INV-${Date.now().toString().slice(-6)}`;
   const issuedDate = new Date().toLocaleDateString();
-  const rightColX = pageWidth - marginX;
+  // Right meta stack
   doc.setFont("helvetica", "bold");
-  doc.text("Invoice No:", rightColX - 40, cursorY);
+  doc.setFontSize(10);
+  doc.text("Invoice No :", pageWidth - 60, cursorY);
+  doc.text("Invoice Date :", pageWidth - 60, cursorY + 6);
   doc.setFont("helvetica", "normal");
-  doc.text(invoiceNo, rightColX, cursorY, { align: "right" });
-  doc.setFont("helvetica", "bold");
-  doc.text("Date:", rightColX - 40, cursorY + 6);
-  doc.setFont("helvetica", "normal");
-  doc.text(issuedDate, rightColX, cursorY + 6, { align: "right" });
+  doc.text(invoiceNo, pageWidth - marginX, cursorY, { align: "right" });
+  doc.text(issuedDate, pageWidth - marginX, cursorY + 6, { align: "right" });
 
-  // Bill To
-  cursorY += 22;
-  doc.setDrawColor(235, 235, 235);
-  doc.roundedRect(marginX, cursorY - 8, pageWidth - marginX * 2, 20, 2, 2);
+  // Seller and Bill To blocks (two columns with labels)
+  cursorY += 16;
+  const colGap = 8;
+  const colWidth = (pageWidth - marginX * 2 - colGap) / 2;
+  const leftX = marginX;
+  const rightX = marginX + colWidth + colGap;
+  const labelColor = [120, 120, 120];
+
+  // Left: Seller
   doc.setFont("helvetica", "bold");
-  doc.text("Bill To", marginX + 4, cursorY);
+  doc.setFontSize(11);
+  doc.text("Seller", leftX, cursorY);
   doc.setFont("helvetica", "normal");
-  doc.text(`${clientName}`, marginX + 4, cursorY + 7);
+  doc.setFontSize(10);
+  doc.setTextColor(...labelColor);
+  doc.text("Name", leftX, cursorY + 6);
+  doc.text("Address", leftX, cursorY + 12);
+  doc.text("Mail", leftX, cursorY + 18);
+  doc.text("Phone", leftX, cursorY + 24);
+  doc.setTextColor(...grayText);
+  doc.text(`:  ${seller.name}`, leftX + 24, cursorY + 6);
+  doc.text(`:  ${seller.address}`, leftX + 24, cursorY + 12);
+  doc.text(`:  ${seller.email}`, leftX + 24, cursorY + 18);
+  doc.text(`:  ${seller.phone}`, leftX + 24, cursorY + 24);
+
+  // Right: Bill To
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(...grayText);
+  doc.text("Bill To", rightX, cursorY);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.setTextColor(...labelColor);
+  doc.text("Name", rightX, cursorY + 6);
+  doc.text("Address", rightX, cursorY + 12);
+  doc.text("Mail", rightX, cursorY + 18);
+  doc.text("Phone", rightX, cursorY + 24);
+  doc.setTextColor(...grayText);
+  doc.text(`:  ${clientName}`, rightX + 26, cursorY + 6);
+  doc.text(`:  ${clientAddress}`, rightX + 26, cursorY + 12);
+  doc.text(`:  ${clientEmail}`, rightX + 26, cursorY + 18);
+  doc.text(`:  ${clientPhone}`, rightX + 26, cursorY + 24);
+
+  // Advance cursor for table start beneath blocks
+  cursorY += 34;
 
   // Table
   const columns = [
-    { header: "#", dataKey: "idx" },
-    { header: "Item", dataKey: "name" },
-    { header: "Price", dataKey: "price" },
-    { header: "Qty", dataKey: "qty" },
+    { header: "No.", dataKey: "idx" },
+    { header: "Description", dataKey: "name" },
+    { header: "Quantity", dataKey: "qty" },
+    { header: "Item Price", dataKey: "price" },
     { header: "Total", dataKey: "total" },
   ];
   const rows = cartItems.map((item, index) => ({
@@ -158,7 +196,7 @@ const handleCheckout = () => {
   }));
 
   autoTable(doc, {
-    startY: cursorY + 20,
+    startY: cursorY,
     columns,
     body: rows,
     styles: { fontSize: 10, textColor: [55, 55, 55] },
@@ -171,8 +209,8 @@ const handleCheckout = () => {
     columnStyles: {
       idx: { cellWidth: 10, halign: "center" },
       name: { cellWidth: 80 },
+      qty: { cellWidth: 20, halign: "center" },
       price: { cellWidth: 30, halign: "right" },
-      qty: { cellWidth: 15, halign: "center" },
       total: { cellWidth: 35, halign: "right" },
     },
     alternateRowStyles: { fillColor: [249, 249, 249] },
@@ -224,15 +262,51 @@ const handleCheckout = () => {
         Your Cart
       </h2>
 
-      {/* Client Name Input */}
-      <div className="mb-8 flex justify-center">
-        <input
-          type="text"
-          placeholder="Enter your name"
-          value={clientName}
-          onChange={(e) => setClientName(e.target.value)}
-          className="w-full max-w-sm px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
-        />
+      {/* Invoice Header: Seller + Bill To */}
+      <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <h3 className="text-sm font-semibold text-gray-900 mb-2">Seller</h3>
+          <p className="text-sm text-gray-700">{seller.name}</p>
+          <p className="text-sm text-gray-700">{seller.address}</p>
+          <p className="text-sm text-gray-700">{seller.email}</p>
+          <p className="text-sm text-gray-700">{seller.phone}</p>
+        </div>
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <h3 className="text-sm font-semibold text-gray-900 mb-3">Bill To</h3>
+          <div className="grid grid-cols-1 gap-3">
+            <input
+              type="text"
+              placeholder="Client name"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
+            />
+            <input
+              type="text"
+              placeholder="Client address"
+              value={clientAddress}
+              onChange={(e) => setClientAddress(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input
+                type="email"
+                placeholder="Client email"
+                value={clientEmail}
+                onChange={(e) => setClientEmail(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
+              />
+              <input
+                type="tel"
+                placeholder="Client phone"
+                value={clientPhone}
+                onChange={(e) => setClientPhone(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
+              />
+            </div>
+            <p className="text-xs text-gray-500">PDF can be generated only after all client details are filled.</p>
+          </div>
+        </div>
       </div>
 
       {cartItems.length === 0 ? (
@@ -286,7 +360,8 @@ const handleCheckout = () => {
             </span>
             <button
               onClick={handleCheckout}
-              className="mt-4 sm:mt-0 px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
+              disabled={!clientName || !clientAddress || !clientEmail || !clientPhone}
+              className={`mt-4 sm:mt-0 px-6 py-2 rounded-lg transition ${(!clientName || !clientAddress || !clientEmail || !clientPhone) ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-orange-500 text-white hover:bg-orange-600'}`}
             >
               Proceed to Checkout
             </button>
