@@ -69,10 +69,12 @@ const Cart = () => {
   };
 
   const handleRemove = async (productId) => {
-    console.log(productId)
     try {
+      // Convert productId to string to match backend expectation (backend does .toString() comparison)
+      const productIdStr = productId?.toString ? productId.toString() : String(productId);
+      
       const response = await axiosInstance.delete('/cart/remove-item', {
-        data: {productId}
+        data: { productId: productIdStr }
       });
       
       if (response.data && response.data.message) {
@@ -331,14 +333,14 @@ const handleCheckout = () => {
 
                 <div className="flex items-center space-x-2">
                   <button
-                    onClick={() => handleDecrease(item.productId._id ? item.productId._id : item.productId)}
+                    onClick={() => handleDecrease(item.productId?._id || item.productId)}
                     className="p-2 rounded-md bg-gray-200 hover:bg-gray-300 transition"
                   >
                     <FaMinus size={12} />
                   </button>
                   <span className="w-6 text-center">{item.quantity}</span>
                   <button
-                    onClick={() => handleIncrease(item.productId._id ? item.productId._id : item.productId)}
+                    onClick={() => handleIncrease(item.productId?._id || item.productId)}
                     className="p-2 rounded-md bg-gray-200 hover:bg-gray-300 transition"
                   >
                     <FaPlus size={12} />
@@ -346,7 +348,7 @@ const handleCheckout = () => {
                 </div>
 
                 <button
-                  onClick={() => handleRemove(item.productId._id ? item.productId._id : item.productId)}
+                  onClick={() => handleRemove(item.productId?._id || item.productId)}
                   className="ml-4 p-2 rounded-md bg-red-500 hover:bg-red-600 text-white transition"
                 >
                   <FaTrash size={12} />
